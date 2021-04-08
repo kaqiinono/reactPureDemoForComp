@@ -2,25 +2,24 @@
   "sourceType": "unambiguous",
   "presets": [
     [
-      "@babel/preset-env",
-      {
-        "useBuiltIns": "usage",
-        "corejs": 3
-      }
+      "@babel/preset-env"
     ],
     [
       "@babel/preset-react",
       {
         "runtime": "automatic"
       }
-    ]
+    ],
+    [
+      "@babel/preset-typescript",
+      {
+        "runtime": "automatic"
+      }
+    ],
   ],
   "plugins": [
     [
-      "@babel/plugin-transform-runtime",
-      {
-        "corejs": 3
-      }
+      "@babel/plugin-transform-runtime"
     ],
     [
       "@babel/plugin-proposal-class-properties",

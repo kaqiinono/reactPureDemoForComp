@@ -25,7 +25,8 @@ module.exports = env => {
         new ESLintPlugin({
             quiet: !env.production,
             failOnError: !!env.production,
-            emitWarning: false
+            emitWarning: false,
+            extensions: ['js', 'jsx', 'ts', 'tsx']
         }),
         new webpack.DefinePlugin({
             isDev: !env.production
@@ -45,20 +46,16 @@ module.exports = env => {
         module: {
             rules: [
                 {
-                    test: /\.(js|jsx)$/,
+                    test: /\.(ts|js)x?$/i,
                     // include: /(src)|(node_modules\/@jd)/,
                     include,
                     use: {
                         loader: 'babel-loader',
                         options: {
-                            cacheDirectory: true
+                            cacheDirectory: true,
+                            presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript']
                         }
                     }
-                },
-                {
-                    test: /\.tsx?$/,
-                    loader: 'ts-loader',
-                    include: path.resolve(__dirname, '../src')
                 },
                 // 处理图片资源
                 {
