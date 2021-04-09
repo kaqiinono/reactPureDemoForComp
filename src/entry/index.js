@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
 import './index.scss';
-import App from '../component/App';
+import DragAndZoom from '../component/DragAndZoom';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<DragAndZoom />, document.getElementById('root'));
