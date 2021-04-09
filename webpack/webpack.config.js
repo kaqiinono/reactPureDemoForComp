@@ -5,7 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
-const include = [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../node_modules/@jd')];
+const include = [path.resolve(__dirname, '../src')];
 
 module.exports = env => {
     const plugins = [
@@ -56,9 +56,26 @@ module.exports = env => {
                     }
                 },
                 {
-                    test: /\.tsx?$/,
-                    loader: 'ts-loader',
-                    include: path.resolve(__dirname, '../src')
+                    test: /\.s?css$/,
+                    include,
+                    use: [
+                        'style-loader',
+                        'css-loader',
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                postcssOptions: {
+                                    plugins: [['postcss-preset-env']]
+                                }
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        }
+                    ]
                 },
                 // 处理图片资源
                 {

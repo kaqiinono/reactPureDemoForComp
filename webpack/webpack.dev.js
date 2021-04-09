@@ -1,14 +1,11 @@
 const { merge } = require('webpack-merge');
 const { HotModuleReplacementPlugin } = require('webpack');
-const path = require('path');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const common = require('./webpack.config.js');
-const cssLoaderInCommon = require('./common');
 const { mockServer } = require('../mock');
-const { getCSSModuleLocalIdent } = require('./utils');
 
 const port = 8000;
-const host = 'http:127.0.0.1';
+const host = '127.0.0.1';
 const base = {
     secure: true,
     changeOrigin: true
@@ -25,40 +22,12 @@ module.exports = env =>
             // chunkFilename: 'chunk/[id].js',
         },
         target: 'web', // 默认browserlist，会导致热更新失败，开发环境使用web
-        module: {
-            rules: [
-                {
-                    test: /\.s?css$/,
-                    include: /src/,
-                    use: [
-                        'style-loader',
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                // esModule: false,
-                                importLoaders: 1,
-                                modules: {
-                                    compileType: 'module',
-                                    mode: 'local',
-                                    // auto: true,
-                                    // localIdentName: '[path][name]__[local]',
-                                    // localIdentContext: path.resolve(__dirname, 'src'),
-                                    // localIdentHashPrefix: 'drive'
-                                    getLocalIdent: getCSSModuleLocalIdent
-                                }
-                            }
-                        },
-                        ...cssLoaderInCommon
-                    ]
-                },
-                {
-                    test: /\.s?css$/,
-                    include: path.resolve(__dirname, '../node_modules/@jd'),
-                    use: ['style-loader', 'css-loader', ...cssLoaderInCommon]
-                }
-            ]
-        },
-        plugins: [new HotModuleReplacementPlugin(), new BundleAnalyzerPlugin()],
+        plugins: [
+            new HotModuleReplacementPlugin(),
+            new BundleAnalyzerPlugin({
+                openAnalyzer: false
+            })
+        ],
         devServer: {
             historyApiFallback: true,
             open: true,

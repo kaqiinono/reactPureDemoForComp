@@ -19,37 +19,6 @@ module.exports = env =>
             publicPath: `/${pkg.name}/static/`,
             chunkFilename: 'js/[name].[contenthash:8].chunk.js'
         },
-        module: {
-            rules: [
-                {
-                    test: /\.s?css$/,
-                    include: /src/,
-                    use: [
-                        MiniCssExtractPlugin.loader,
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                // esModule: false,
-                                importLoaders: 1,
-                                modules: {
-                                    compileType: 'module',
-                                    mode: 'local',
-                                    localIdentName: '[path][name]__[local]__[contenthash:base64:5]',
-                                    localIdentContext: path.resolve(__dirname, 'src'),
-                                    localIdentHashPrefix: 'drive'
-                                }
-                            }
-                        },
-                        ...cssLoaderInCommon
-                    ]
-                },
-                {
-                    test: /\.s?css$/,
-                    include: path.resolve(__dirname, '../node_modules/@jd'),
-                    use: ['style-loader', 'css-loader', ...cssLoaderInCommon]
-                }
-            ]
-        },
         plugins: [
             new MiniCssExtractPlugin({
                 filename: 'style/[name]-[contenthash:8].css',
