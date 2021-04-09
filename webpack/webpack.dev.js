@@ -8,7 +8,7 @@ const { mockServer } = require('../mock');
 const { getCSSModuleLocalIdent } = require('./utils');
 
 const port = 8000;
-const host = 'http:127.0.0.1';
+const host = '127.0.0.1';
 const base = {
     secure: true,
     changeOrigin: true
