@@ -55,11 +55,6 @@ module.exports = env => {
                         }
                     }
                 },
-                {
-                    test: /\.tsx?$/,
-                    loader: 'ts-loader',
-                    include: path.resolve(__dirname, '../src')
-                },
                 // 处理图片资源
                 {
                     test: /\.(png|jpg|jpeg|gif|svg)$/i,
