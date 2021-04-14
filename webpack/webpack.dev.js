@@ -1,14 +1,13 @@
 const { merge } = require('webpack-merge');
 const { HotModuleReplacementPlugin } = require('webpack');
 const path = require('path');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const common = require('./webpack.config.js');
 const cssLoaderInCommon = require('./common');
 const { mockServer } = require('../mock');
 const { getCSSModuleLocalIdent } = require('./utils');
 
 const port = 8000;
-const host = 'http:127.0.0.1';
+const host = '127.0.0.1';
 const base = {
     secure: true,
     changeOrigin: true
@@ -58,7 +57,7 @@ module.exports = env =>
                 }
             ]
         },
-        plugins: [new HotModuleReplacementPlugin(), new BundleAnalyzerPlugin()],
+        plugins: [new HotModuleReplacementPlugin()],
         devServer: {
             historyApiFallback: true,
             open: true,

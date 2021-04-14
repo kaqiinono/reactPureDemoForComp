@@ -9,6 +9,7 @@ const cssLoaderInCommon = require('./common');
 // const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 // const TerserWebpackPlugin = require('terser-webpack-plugin');
 const pkg = require('../package.json');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = env =>
     merge(common(env), {
@@ -55,7 +56,8 @@ module.exports = env =>
                 filename: 'style/[name]-[contenthash:8].css',
                 chunkFilename: 'style/[id]-[contenthash:8].css'
             }),
-            new CssMinimizerPlugin()
+            new CssMinimizerPlugin(),
+            new BundleAnalyzerPlugin()
         ],
         optimization: {
             minimize: true,

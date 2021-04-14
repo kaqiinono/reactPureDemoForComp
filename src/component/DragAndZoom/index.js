@@ -1,18 +1,9 @@
-import Drag from './Drag';
-import DropTarget from './DropTarget';
+import DraggableList from './DragWithAnimation';
 
 const DragAndZoom = () => {
-    const itemDropped = item => {
-        console.log('itemDropped', item);
-    };
     return (
         <>
-            <Drag dataItem="item">
-                <div>这个组件可以拖动</div>
-            </Drag>
-            <DropTarget onItemDropped={itemDropped}>
-                <div>请将组件拖放到这里</div>
-            </DropTarget>
+            <DraggableList items={'Lorem ipsum dolor sit'.split(' ')} />
         </>
     );
 };
