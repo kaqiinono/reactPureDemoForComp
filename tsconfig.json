@@ -30,8 +30,6 @@
     "resolveJsonModule": true,
     // Include modules imported with .json extension
     "noEmit": true,
-    // Do not emit output (meaning do not compile code, only perform type checking)
-    "jsx": "react",
     // Support JSX in .tsx files
     "sourceMap": true,
     // Generate corrresponding .map file
@@ -45,6 +43,7 @@
     // Enable incremental compilation by reading/writing information from prior compilations to a file on disk
     "noFallthroughCasesInSwitch": true
     // Report errors for fallthrough cases in switch statement
+    "jsx": "react-jsx"
   },
   "include": [
     "src/**/*"
@@ -53,7 +52,8 @@
   "exclude": [
     "node_modules",
     "dist",
-    "webpack"
+    "webpack",
+    "**/*.js"
   ]
   // *** The files to not type check ***
 }

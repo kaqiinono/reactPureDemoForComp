@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import './index.scss';
+import Test from '../Test';
 
 const consoleText = (targetElement, words, id, colors) => {
     const target = targetElement;
@@ -67,6 +68,7 @@ const App = () => {
             <div className="console-underscore" id="console">
                 &#95;
             </div>
+            <Test name="this is a test" />
         </div>
     );
 };

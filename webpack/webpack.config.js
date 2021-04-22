@@ -52,8 +52,8 @@ module.exports = env => {
                     use: {
                         loader: 'babel-loader',
                         options: {
-                            cacheDirectory: true,
-                            presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript']
+                            cacheDirectory: true
+                            // presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript']
                         }
                     }
                 },

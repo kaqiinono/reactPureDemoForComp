@@ -1,16 +1,16 @@
 import axios from 'axios';
 
-function fetch( url, type, data ) {
+function fetch(url, type, data) {
     const params = {
         url,
-        method: type && type.toLowerCase(),
+        method: type && type.toLowerCase()
     };
 
     // 默认使用application/json类型，特殊类型需要自定义
     if (params.method === 'post') {
         // params.contentType = 'application/json;charset=UTF-8';
         params.headers = {
-            'Content-Type': 'application/json; charset=UTF-8',
+            'Content-Type': 'application/json; charset=UTF-8'
         };
         if (data) {
             params.data = JSON.stringify(data);
@@ -19,12 +19,12 @@ function fetch( url, type, data ) {
         // axios get请求参数放在params属性中
         params.params = data;
     }
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
         axios({
             crossOrigin: true,
-            ...params,
+            ...params
         })
-            .then((response) => {
+            .then(response => {
                 const responseData = response.data;
                 // !isDevEnv &&
                 if (response.status >= 200 && response.status < 300) {
@@ -35,7 +35,7 @@ function fetch( url, type, data ) {
                     resolve(responseData);
                 }
             })
-            .catch((error) => {
+            .catch(error => {
                 console.log(error);
             });
     });
@@ -47,5 +47,5 @@ export default {
     },
     post(url, data) {
         return fetch(url, 'post', data);
-    },
+    }
 };

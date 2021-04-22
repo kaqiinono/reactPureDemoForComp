@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom';
 import './index.scss';
-// import App from '../component/App';
-import CommonMenu from '../component/Menu/index';
+import App from '../component/App';
 
-ReactDOM.render(<CommonMenu />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
