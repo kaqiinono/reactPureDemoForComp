@@ -1,74 +1,26 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './index.scss';
+import VirtualList from '../VirtualList';
+import { fetchData } from './util';
 
-const consoleText = (targetElement, words, id, colors) => {
-    const target = targetElement;
-    if (colors === undefined) {
-        // eslint-disable-next-line no-param-reassign
-        colors = ['#fff'];
-    }
-    let visible = true;
-    const con = document.getElementById('console');
-    let letterCount = 1;
-    let x = 1;
-    let waiting = false;
-    target.setAttribute('style', `color:${colors[0]}`);
-    window.setInterval(function () {
-        if (letterCount === 0 && waiting === false) {
-            waiting = true;
-            target.innerHTML = words[0].substring(0, letterCount);
-            window.setTimeout(function () {
-                const usedColor = colors.shift();
-                colors.push(usedColor);
-                const usedWord = words.shift();
-                words.push(usedWord);
-                x = 1;
-                target.setAttribute('style', `color:${colors[0]}`);
-                letterCount += x;
-                waiting = false;
-            }, 1000);
-        } else if (letterCount === words[0].length + 1 && waiting === false) {
-            waiting = true;
-            window.setTimeout(function () {
-                x = -1;
-                letterCount += x;
-                waiting = false;
-            }, 1000);
-        } else if (waiting === false) {
-            target.innerHTML = words[0].substring(0, letterCount);
-            letterCount += x;
-        }
-    }, 120);
-    window.setInterval(function () {
-        if (visible === true) {
-            con.className = 'console-underscore hidden';
-            visible = false;
-        } else {
-            con.className = 'console-underscore';
+// 可视区域高度固定 screenHeight
+// 列表每项高度固定 itemSize
+// 列表数据 listData
+// 当前滚动位置 scrollTop
 
-            visible = true;
-        }
-    }, 400);
-};
+// 列表总高度 listHeight = listData.length * itemSize
+// 可显示的列表项数 visibleCount = Math.ceil(screenHeight / itemSize)
+// 数据的起始索引 startIndex = Math.floor(scrollTop / itemSize)
+// 数据的结束索引 endIndex = startIndex + visibleCount
+// 列表显示数据为 visibleData = listData.slice(startIndex,endIndex)
+// 偏移量 startOffset = scrollTop - (scrollTop % itemSize);
 
 const App = () => {
-    const showSpanEl = useRef(null);
+    const [data, setData] = useState([]);
     useEffect(() => {
-        consoleText(showSpanEl.current, ['Hello World.', 'Console Text', 'Made with Love.'], 'text', [
-            'tomato',
-            'rebeccapurple',
-            'lightblue'
-        ]);
-    });
-
-    return (
-        <div className="console-container">
-            <span id="text" ref={showSpanEl} />
-            <div className="console-underscore" id="console">
-                &#95;
-            </div>
-        </div>
-    );
+        setData(fetchData());
+    }, []);
+    return <VirtualList dataSource={data} />;
 };
 
 export default App;

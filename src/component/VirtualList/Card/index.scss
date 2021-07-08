@@ -1,0 +1,27 @@
+:global {
+  .item.height-fixed__item {
+    position: absolute;
+    contain: layout;
+    will-change: transform;
+    width: 80%;
+  }
+
+  .item {
+    height: 180px;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    box-shadow: 5px 5px 5px #dddddd;
+    margin: 10px 10px 0 10px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .item__wrapper {
+    display: flex;
+    align-items: center;
+
+    .item__info {
+      margin-right: 10px;
+    }
+  }
+}
