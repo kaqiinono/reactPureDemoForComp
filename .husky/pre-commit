@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🍰 just let you know, you can use [git cz] command to commit your changes without any scope!"
+npx lint-staged --allow-empty 
