@@ -16,8 +16,8 @@ module.exports = env => {
             minify: {
                 // 压缩html
                 collapseWhitespace: true, // 压缩空白
-                removeComments: true // 去除注释
-            }
+                removeComments: true, // 去除注释
+            },
             // chunks: Object.keys(entry) 单页面不需要，默认提取所有chunks
         }),
         new CleanWebpackPlugin(),
@@ -25,13 +25,13 @@ module.exports = env => {
         new ESLintPlugin({
             quiet: !env.production,
             failOnError: !!env.production,
-            emitWarning: false
+            emitWarning: false,
         }),
         new webpack.DefinePlugin({
-            isDev: !env.production
+            isDev: !env.production,
         }),
         // 忽略解析三方包里插件
-        new webpack.IgnorePlugin(/\.\/locale/, /moment/)
+        // new webpack.IgnorePlugin(/\.\/locale/, /moment/)
     ];
     return {
         entry: path.resolve(__dirname, '../src/entry/index.js'),
@@ -39,7 +39,7 @@ module.exports = env => {
             // 根据入口起点名称动态生成 bundle 名称
             path: path.resolve(__dirname, '../dist'),
             // filename: 'js/[name].js',
-            publicPath: '/'
+            publicPath: '/',
         },
         plugins,
         module: {
@@ -51,9 +51,9 @@ module.exports = env => {
                     use: {
                         loader: 'babel-loader',
                         options: {
-                            cacheDirectory: true
-                        }
-                    }
+                            cacheDirectory: true,
+                        },
+                    },
                 },
                 // 处理图片资源
                 {
@@ -63,12 +63,12 @@ module.exports = env => {
                     type: 'asset/resource',
                     parser: {
                         dataUrlCondition: {
-                            maxSize: 10 * 1024 // 4kb
-                        }
+                            maxSize: 10 * 1024, // 4kb
+                        },
                     },
                     generator: {
-                        filename: 'static/images/[name][ext][query]'
-                    }
+                        filename: 'static/images/[name][ext][query]',
+                    },
                 },
                 // 处理字体文件
                 {
@@ -76,16 +76,16 @@ module.exports = env => {
                     include,
                     type: 'asset/resource',
                     generator: {
-                        filename: 'static/fonts/[name][ext][query]'
-                    }
-                }
-            ]
+                        filename: 'static/fonts/[name][ext][query]',
+                    },
+                },
+            ],
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js', '.jsx', 'css', '.scss'],
             alias: {
-                '@jd/react-grace': '@jd/react-grace/dist/widget/'
-            }
+                '@jd/react-grace': '@jd/react-grace/dist/widget/',
+            },
         },
         optimization: {
             concatenateModules: true,
@@ -101,7 +101,7 @@ module.exports = env => {
                         chunks: 'all',
                         priority: 20, // 设置优先级，首先抽离第三方模块,默认0
                         name: 'vendor',
-                        enforce: true
+                        enforce: true,
                     },
                     // 抽離公共模块
                     common: {
@@ -109,16 +109,16 @@ module.exports = env => {
                         minSize: 0,
                         name: 'common',
                         minChunks: 2,
-                        priority: 10
-                    }
+                        priority: 10,
+                    },
                     // styles: {
                     //   name: 'styles',
                     //   test: /\.(scss|css)$/,
                     //   chunks: 'all',
                     //   enforce: true,
                     // },
-                }
-            }
-        }
+                },
+            },
+        },
     };
 };

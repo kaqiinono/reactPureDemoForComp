@@ -3,74 +3,77 @@
   "description": "description",
   "main": "index.js",
   "scripts": {
-    "dev": "bash script/husky.sh && webpack serve --open --config webpack/webpack.dev.js --progress",
+    "start": "webpack serve --open --config webpack/webpack.dev.js --progress",
     "build": "webpack --config webpack/webpack.prod.js --env production --progress",
     "test": "bash script/husky.sh && webpack serve --open --config webpack/webpack.dev.js --env production --progress",
-    "release": "bash script/release.sh",
+    "release": "standard-version --dry-run",
     "lint": "eslint --quiet  --cache --ext .jsx,.js --fix ./src",
     "fix": "prettier --write  ./src",
     "release-init": "standard-version -- --first-release",
     "husky": "husky install",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "preinstall": "bash script/husky.sh",
+    "postinstall": "dm-husky"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.13.14",
-    "@babel/eslint-parser": "^7.13.14",
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/plugin-proposal-decorators": "^7.13.5",
-    "@babel/plugin-transform-runtime": "^7.13.10",
-    "@babel/preset-env": "^7.13.12",
-    "@babel/preset-react": "^7.13.13",
-    "@commitlint/cli": "^12.1.1",
-    "@commitlint/config-conventional": "^12.1.1",
+    "@babel/core": "^7.18.9",
+    "@babel/eslint-parser": "^7.18.9",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-decorators": "^7.18.9",
+    "@babel/plugin-transform-runtime": "^7.18.9",
+    "@babel/preset-env": "^7.18.9",
+    "@babel/preset-react": "^7.18.6",
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
     "@tsconfig/recommended": "^1.0.1",
-    "babel-loader": "^8.2.2",
-    "clean-webpack-plugin": "^3.0.0",
-    "core-js": "^3.10.1",
-    "css-loader": "^5.2.0",
-    "css-minimizer-webpack-plugin": "^1.3.0",
-    "eslint": "^7.23.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-import-resolver-webpack": "^0.13.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "core-js": "^3.23.5",
+    "css-loader": "^6.7.1",
+    "css-minimizer-webpack-plugin": "^4.0.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-webpack": "^0.13.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-react": "^7.23.1",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "eslint-webpack-plugin": "^2.5.3",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-webpack-plugin": "^3.2.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
-    "html-webpack-plugin": "^5.3.1",
-    "husky": "^6.0.0",
-    "lint-staged": "^10.5.4",
-    "loader-utils": "^2.0.0",
-    "mini-css-extract-plugin": "^1.4.1",
+    "html-webpack-plugin": "^5.5.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "loader-utils": "^3.2.0",
+    "mini-css-extract-plugin": "^2.6.1",
     "mockjs": "^1.1.0",
-    "node-sass": "^5.0.0",
-    "postcss": "^8.2.9",
-    "postcss-loader": "^5.2.0",
-    "postcss-preset-env": "^6.7.0",
-    "prettier": "^2.2.1",
-    "sass-loader": "^11.0.1",
+    "node-sass": "^7.0.1",
+    "postcss": "^8.4.14",
+    "postcss-loader": "^7.0.1",
+    "postcss-preset-env": "^7.7.2",
+    "prettier": "^2.7.1",
+    "sass-loader": "^13.0.2",
     "source-map-explorer": "^2.5.2",
-    "standard-version": "^9.2.0",
-    "style-loader": "^2.0.0",
-    "webpack": "^5.31.0",
-    "webpack-bundle-analyzer": "^4.4.0",
-    "webpack-cli": "^4.6.0",
-    "webpack-dev-server": "^3.11.2",
-    "webpack-merge": "^5.7.3"
+    "standard-version": "^9.5.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.73.0",
+    "webpack-bundle-analyzer": "^4.5.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.3",
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.27.2",
     "classnames": "^2.3.1",
-    "prop-types": "^15.7.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "sideEffects": [
     "*.css",
@@ -81,84 +84,9 @@
     "not dead",
     "not op_mini all"
   ],
-  "lint-staged": {
-    "src/**/*.js": [
-      "prettier --write",
-      "eslint --quiet  --cache --ext .jsx,.js --fix ./src",
-      "git add"
-    ]
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
-    "rules": {
-      "header-max-length": [
-        0,
-        "always",
-        100
-      ],
-      "type-enum": [
-        2,
-        "always",
-        [
-          "feat",
-          "fix",
-          "docs",
-          "style",
-          "refactor",
-          "test",
-          "revert",
-          "perf",
-          "chore",
-          "conflict"
-        ]
-      ]
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "standard-version": {
-    "changelogHeader": "# Change Log",
-    "types": [
-      {
-        "type": "feat",
-        "section": "需求列表"
-      },
-      {
-        "type": "fix",
-        "section": "Bug修复"
-      },
-      {
-        "type": "perf",
-        "section": "优化列表"
-      },
-      {
-        "type": "chore",
-        "hidden": true
-      },
-      {
-        "type": "docs",
-        "hidden": true
-      },
-      {
-        "type": "style",
-        "hidden": true
-      },
-      {
-        "type": "refactor",
-        "hidden": true
-      },
-      {
-        "type": "test",
-        "hidden": true
-      },
-      {
-        "type": "conflict",
-        "hidden": true
-      },
-      {
-        "type": "revert",
-        "hidden": true
-      }
-    ]
   }
 }

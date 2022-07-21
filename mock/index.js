@@ -6,7 +6,7 @@ const RequestTypeEnum = {
     GET: 'get',
     PUT: 'put',
     DELETE: 'delete',
-    POST: 'post'
+    POST: 'post',
 };
 
 /* 读取mock下的所有js文件 */
@@ -29,21 +29,22 @@ function findSync(startPath) {
 }
 
 /* 通过require获取js文件中导出的函数，执行并传递app参数 */
-const mockServer = app => {
+const mockServer = (middlewares, devServer) => {
     findSync(path.resolve(__dirname, './api')).forEach(dir => {
         // eslint-disable-next-line import/no-dynamic-require,global-require
         const services = require(dir);
         Object.keys(services).map(sk => {
             const curService = services[sk];
-            return app[curService.method](`/mock/api/${sk}`, (req, res) => {
+            return devServer.app.get(`/mock/api/${sk}`, (req, res) => {
                 res.json(mock.mock(curService.data));
             });
         });
     });
     console.log('Mock: service started successfully ✔');
+    return middlewares;
 };
 
 module.exports = {
     mockServer,
-    RequestTypeEnum
+    RequestTypeEnum,
 };
